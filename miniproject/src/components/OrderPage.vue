@@ -25,7 +25,7 @@
 import gql from "graphql-tag";
 const ADD_ORDER = gql(`
 
-mutation MyMutation($name: String!, $phone: Int!, $product: String!, $message: String!) {
+mutation MyMutation($name: String!, $phone: Int = 15, $product: String!, $message: String!) {
   insert_Order(objects: {name: $name, phone: $phone, product: $product, message: $message}) {
     returning {
       id

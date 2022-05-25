@@ -11,13 +11,10 @@
                 src="./../assets/images/contact/order.jpg" alt="">
                 </v-img>
                 <p>Congratulations your order is success</p>
-                 {{ $route.params.id }}
-            <v-card-text class="text--primary">
-                <div>{{dataInvoice.name}}</div>
-                <div>{{dataInvoice.phone}}</div>
-                <div>{{dataInvoice.product}}</div>
-                <div>{{dataInvoice.messsage}}</div>
-            </v-card-text>
+                <div>Name : {{dataInvoice.name}}</div>
+                <div>Phone : {{dataInvoice.phone}}</div>
+                <div>Product : {{dataInvoice.product}}</div>
+                <div>Message : {{dataInvoice.message}}</div>
             </v-card>    
             </v-col>
         </v-row>
@@ -48,14 +45,15 @@ const GET_DATA = gql(
     },
     methods:{
         async fetchData(){
-            this.dataInvoice = await this.$apollo.query(
+            let hasil = await this.$apollo.query(
         {
         query:GET_DATA,
         variables:{
             _eq: this.$route.params.id,
         }
         });
-        console.log("data Invoice : ", this.dataInvoice)
+        this.dataInvoice = hasil.data.Order[0];
+        console.log("data Invoice : ", hasil.data.Order[0]);
         }
     },
     mounted(){
